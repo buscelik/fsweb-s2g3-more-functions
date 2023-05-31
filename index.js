@@ -52,8 +52,12 @@ function ortalamaBul(arr) {
     return null;
   }
 
-  const ortalama = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / arr.length;
+  let toplam = 0;
+  for (let i = 0; i < arr.length; i++) {
+    toplam += arr[i];
+  }
 
+  const ortalama = toplam / arr.length;
   return ortalama;
 }
 
@@ -83,22 +87,36 @@ console.log(ortalamaBul([109, 216, 288, 143, 71, 185, -278, 194, 5])); // 104
 */
 
 function ortalamadanBuyukleriBul(arr) {
-  const ortalama = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / arr.length;
-
-  const buyukElemanlar = arr.reduce((accumulator, currentValue) => {
-    if (currentValue >= ortalama) {
-      accumulator.push(currentValue);
+  const ortalamaBul = (arr) => {
+    if (arr.length === 0) {
+      return null;
     }
-    return accumulator;
-  }, []);
 
-  return buyukElemanlar.length === 0 ? null : buyukElemanlar;
+    let toplam = 0;
+    for (let i = 0; i < arr.length; i++) {
+      toplam += arr[i];
+    }
+
+    const ortalama = toplam / arr.length;
+    return ortalama;
+  };
+
+  const ortalama = ortalamaBul(arr);
+
+  if (ortalama === null) {
+    return null;
+  }
+
+  const buyukElemanlar = arr.filter((eleman) => eleman >= ortalama);
+
+  return buyukElemanlar;
 }
 
 console.log(ortalamadanBuyukleriBul([])); // null
 console.log(ortalamadanBuyukleriBul([4])); // [4]
 console.log(ortalamadanBuyukleriBul([50, -26, 153, 7])); // [50, 153]
 console.log(ortalamadanBuyukleriBul([109, 216, 288, 143, 71, 185, -278, 194, 5])); // [109, 216, 288, 143, 185, 194]
+
 
 
 /* !!!! Burdan aşağısını değiştirmeyin !!!! */
