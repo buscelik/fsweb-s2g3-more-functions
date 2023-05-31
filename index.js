@@ -16,9 +16,18 @@
   örnek output: ""
 */
 
-function dosyaAdiniBul(/* kodlar buraya */) {
-  // kodlar buraya
+function dosyaAdiniBul(path) {
+  if (path.includes("/")) {
+    const parts = path.split("/");
+    return parts[parts.length - 1];
+  } else {
+    return path;
+  }
 }
+
+console.log(dosyaAdiniBul("C:/Users/johnsmith/Music/Beethoven_5.mp3")); // "Beethoven_5.mp3"
+console.log(dosyaAdiniBul("Beethoven_5.mp3")); // "Beethoven_5.mp3"
+console.log(dosyaAdiniBul("")); // ""
 
 /*
   GÖREV 2
@@ -38,9 +47,24 @@ function dosyaAdiniBul(/* kodlar buraya */) {
   örnek output: 104
 */
 
-function ortalamaBul(/* kodlar buraya */) {
-  // kodlar buraya
+function ortalamaBul(arr) {
+  if (arr.length === 0) {
+    return null;
+  }
+
+  let toplam = 0;
+  for (let i = 0; i < arr.length; i++) {
+    toplam += arr[i];
+  }
+
+  const ortalama = toplam / arr.length;
+  return ortalama;
 }
+
+console.log(ortalamaBul([])); // null
+console.log(ortalamaBul([4])); // 4
+console.log(ortalamaBul([50, -26, 153, 7])); // 46
+console.log(ortalamaBul([109, 216, 288, 143, 71, 185, -278, 194, 5])); // 104
 
 /*
   GÖREV 3
@@ -62,9 +86,38 @@ function ortalamaBul(/* kodlar buraya */) {
   örnek output: [109, 216, 288, 143, 185, 194]
 */
 
-function ortalamadanBuyukleriBul(/* kodlar buraya */) {
-  // kodlar buraya
+function ortalamadanBuyukleriBul(arr) {
+  const ortalamaBul = (arr) => {
+    if (arr.length === 0) {
+      return null;
+    }
+
+    let toplam = 0;
+    for (let i = 0; i < arr.length; i++) {
+      toplam += arr[i];
+    }
+
+    const ortalama = toplam / arr.length;
+    return ortalama;
+  };
+
+  const ortalama = ortalamaBul(arr);
+
+  if (ortalama === null) {
+    return null;
+  }
+
+  const buyukElemanlar = arr.filter((eleman) => eleman >= ortalama);
+
+  return buyukElemanlar;
 }
+
+console.log(ortalamadanBuyukleriBul([])); // null
+console.log(ortalamadanBuyukleriBul([4])); // [4]
+console.log(ortalamadanBuyukleriBul([50, -26, 153, 7])); // [50, 153]
+console.log(ortalamadanBuyukleriBul([109, 216, 288, 143, 71, 185, -278, 194, 5])); // [109, 216, 288, 143, 185, 194]
+
+
 
 /* !!!! Burdan aşağısını değiştirmeyin !!!! */
 function as() {
